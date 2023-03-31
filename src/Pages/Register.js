@@ -49,7 +49,7 @@ export default function Register() {
           }
     
           axios.post(
-            'http://itachi2003.pythonanywhere.com/auth/createuser/',
+            'https://itachi2003.pythonanywhere.com/auth/createuser/',
             dataForApiRequest,
           )
             .then(function ({ res, status }) {
