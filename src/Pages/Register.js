@@ -55,7 +55,7 @@ export default function Register() {
         axios({
             url:"http://itachi2003.pythonanywhere.com/auth/createuser/",
             method:'post',
-            data: JSON.parse(profdata),
+            data: profdata,
         })
         .then((res)=>{
             console.log(res)
