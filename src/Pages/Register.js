@@ -51,7 +51,7 @@ export default function Register() {
           }
     
           axios.post(
-            'http://127.0.0.1:8000/auth/createuser/',
+            'https://itachi2003.pythonanywhere.com/auth/createuser/',
             dataForApiRequest,
           )
             .then(function ({ data, status }) {
