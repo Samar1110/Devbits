@@ -68,8 +68,8 @@ export default function Register() {
         .catch((err)=>{
             console.log("Hello1")
             console.log(profdata)
-
             console.log(err)
+            console.log(err.request)
         })
     }
 
