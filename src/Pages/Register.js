@@ -71,7 +71,7 @@ export default function Register() {
 
             console.log(err)
         })
-
+    }
 
     return (
         <>
