@@ -33,18 +33,18 @@ export default function Register() {
     //   });
 
     //   const profileData = window.sessionStorage.getItem('profileData');
-      const postData = async (e) => {
-        console.log("Hello123")
-        // e.preventDefault()
-        console.log(e)
-        try {
-            console.log("Jai Siya Ram")
-            const resp = await axios.post("http://itachi2003.pythonanywhere.com/auth/createuser/",e );
-          } catch (error) {
-            console.log(error);
-          }
-        };
-    // const postData = async () => {
+    //   const postData = async (e) => {
+    //     console.log("Hello123")
+    //     // e.preventDefault()
+    //     console.log(e)
+    //     try {
+    //         console.log("Jai Siya Ram")
+    //         const resp = await axios.post("http://itachi2003.pythonanywhere.com/auth/createuser/",e );
+    //       } catch (error) {
+    //         console.log(error);
+    //       }
+    //     };
+    const postData = async (profdata) => {
     //     try {
     //       const response = await axios.post("http://127.0.0.1:8000/auth/createuser/", userData);
     //       console.log(response);
@@ -52,24 +52,25 @@ export default function Register() {
     //       console.log(error);
     //     }
     //   };
-        // axios({
-        //     url:"http://127.0.0.1:8000/auth/createuser/",
-        //     method:'post',
-        //     data: profdata,
-        // })
-        // .then((res)=>{
-        //     console.log(res)
-        //     console.log("Hello2")
-        //     window.sessionStorage.setItem('registered_email', res.data.email);
-        //     window.sessionStorage.setItem('profileData', JSON.stringify(res.data));
-        //     navigate('/');
-        // })
-        // .catch((err)=>{
-        //     console.log("Hello1")
-        //     console.log(profdata)
+        axios({
+            url:"http://itachi2003.pythonanywhere.com/auth/createuser/",
+            method:'post',
+            data: profdata,
+        })
+        .then((res)=>{
+            console.log(res)
+            console.log("Hello2")
+            console.log("Jai Mata Di")
+            // window.sessionStorage.setItem('registered_email', res.data.email);
+            // window.sessionStorage.setItem('profileData', JSON.stringify(res.data));
+            // navigate('/');
+        })
+        .catch((err)=>{
+            console.log("Hello1")
+            console.log(profdata)
 
-        //     console.log(err)
-        // })
+            console.log(err)
+        })
 
 
     return (
