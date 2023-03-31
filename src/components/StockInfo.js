@@ -26,7 +26,7 @@ const StockInfo = (props) => {
         setStockDescription();
         PriceSetting();
     }, []);
-    const [Price, setPrice] = React.useState("ashish");
+    const [Price, setPrice] = React.useState("2291738");
     const [stockGraph, setStockGraph] = React.useState([]);
     const [stockName, setStockName] = useState([]);
     const [stockDescription, setStockDescription] = useState("")

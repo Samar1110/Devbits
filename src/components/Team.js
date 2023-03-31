@@ -2,15 +2,15 @@ import React from "react";
 export default function Team() {
     return (
         <>
-            <section className="py-6 bg-whiet text-gray-800">
+            <section className="py-6 bg-white text-gray-800">
                 <div className="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
                     <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">Development team</p>
                     <h1 className="text-4xl font-bold leading-none text-center sm:text-5xl">The talented people behind the scenes</h1>
                     <div className="flex flex-row flex-wrap-reverse justify-center mt-8">
                         <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-800 text-gray-100">
-                            <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="https://source.unsplash.com/100x100/?portrait?0" />
+                            <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="https://i.pinimg.com/236x/61/cd/a7/61cda705bb1355f4826ee5ff3d817e12.jpg" />
                             <div className="flex-1 my-4">
-                                <p className="text-xl font-semibold leading-snug">Leroy Jenkins</p>
+                                <p className="text-xl font-semibold leading-snug">Rakshit Sawhney</p>
                                 <p>Visual Designer</p>
                             </div>
                             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
@@ -38,10 +38,10 @@ export default function Team() {
                             </div>
                         </div>
                         <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-800 text-gray-100">
-                            <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="https://source.unsplash.com/100x100/?portrait?1" />
+                            <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="https://i.pinimg.com/236x/2d/b7/8e/2db78eb834f86bf4f9e05502c221b075.jpg" />
                             <div className="flex-1 my-4">
-                                <p className="text-xl font-semibold leading-snug">Leroy Jenkins</p>
-                                <p>Visual Designer</p>
+                                <p className="text-xl font-semibold leading-snug">Samar Singh</p>
+                                <p>Developer</p>
                             </div>
                             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
                                 <a rel="noopener noreferrer" href="#" title="Email" className="text-gray-50 hover:text-emerald-600">
@@ -68,10 +68,10 @@ export default function Team() {
                             </div>
                         </div>
                         <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-800 text-gray-100">
-                            <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="https://source.unsplash.com/100x100/?portrait?2" />
+                            <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="https://i.pinimg.com/236x/13/af/91/13af91c9778321776bdcc40f6b383c51.jpg" />
                             <div className="flex-1 my-4">
-                                <p className="text-xl font-semibold leading-snug">Leroy Jenkins</p>
-                                <p>Visual Designer</p>
+                                <p className="text-xl font-semibold leading-snug">Archit Pattanaik</p>
+                                <p>Developer</p>
                             </div>
                             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
                                 <a rel="noopener noreferrer" href="#" title="Email" className="text-gray-50 hover:text-emerald-600">

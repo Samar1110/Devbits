@@ -9,6 +9,8 @@ import Dashboard from './Pages/Dashboard';
 import Stock from './Pages/Stocks';
 import StockInfo from './components/StockInfo';
 import Cart from './Pages/Cart';
+import News from './components/News';
+
 import './App.css';
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
       <Route path="/stock" element={<Stock/>}  />
       <Route path="/stockinfo/:id" element={<StockInfo/>} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/news" element={<News />} />
     </Routes>
 
     

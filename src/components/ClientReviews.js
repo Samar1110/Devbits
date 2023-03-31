@@ -14,7 +14,7 @@ export default function ClientReviews() {
                             <div className="grid gap-4 md:grid-cols-2">
                                 <div className="grid content-center gap-4">
                                     <div className="p-6 rounded shadow-md bg-black">
-                                        <p className="text-white">I've been using Hawkfolio for a few months now and it's been a game-changer for me. The platform is so user-friendly and the customer support is top-notch. I've made some great trades with the help of their expert insights and tools. Highly recommend!</p>
+                                        <p className="text-white">I've been using HawkFolio for a few months now and it's been a game-changer for me. The platform is so user-friendly and the customer support is top-notch. I've made some great trades with the help of their expert insights and tools. Highly recommend!</p>
                                         <div className="flex items-center mt-4 space-x-4">
                                             <img src="https://source.unsplash.com/50x50/?portrait?1" alt="" className="w-12 h-12 bg-center bg-cover rounded-full bg-black0" />
                                             <div>
@@ -46,7 +46,7 @@ export default function ClientReviews() {
                                         </div>
                                     </div>
                                     <div className="p-6 rounded shadow-md bg-black">
-                                        <p className="text-white">Hawkfolio has helped me transform my investment strategy. The community is so supportive and the personalized advice has been invaluable. I feel more confident than ever about my financial future thanks to Hawkfolio.</p>
+                                        <p className="text-white">HawkFolio has helped me transform my investment strategy. The community is so supportive and the personalized advice has been invaluable. I feel more confident than ever about my financial future thanks to HawkFolio.</p>
                                         <div className="flex items-center mt-4 space-x-4">
                                             <img src="https://source.unsplash.com/50x50/?portrait?4" alt="" className="w-12 h-12 bg-center bg-cover rounded-full bg-black0" />
                                             <div>
