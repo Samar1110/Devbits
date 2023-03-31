@@ -5,9 +5,10 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Spline from '@splinetool/react-spline';
+import { useState } from "react";
 
 export default function Register() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     // useEffect(() => {
     //     postData();
     //   }, []);
@@ -23,7 +24,69 @@ export default function Register() {
       register("pass1")
       register("pass2")
       register("email")
+      const [fname, setFname] = useState('')
+      const [lname, setLname] = useState('')
+      const [email, setEmail] = useState('')
+      const [pass1, setPass1] = useState('')
+      const [pass2, setPass2] = useState('')
+      const [username, setUsername] = useState('')
+      const registerDone = (e) => {
+        e.preventDefault()
     
+        // if (
+        //   registerFieldsAreValid(firstName, lastName, email, username, password)
+        // ) {
+        //   console.log('Please wait...')
+    
+          const dataForApiRequest = {
+            fname: fname,
+            lname: lname,
+            email: email,
+            username: username,
+            pass1:pass1,
+            pass2:pass2,
+            // password: password,
+          }
+    
+          axios.post(
+            'http://itachi2003.pythonanywhere.com/auth/createuser/',
+            dataForApiRequest,
+          )
+            .then(function ({ res, status }) {
+                console.log(res)
+                console.log("Hello2")
+                console.log("Jai Mata Di")
+            //   setToken(data.token)
+            //   toast.success("Registered Successfully...",{position: "bottom-right",autoClose: 2000})
+            //   setTimeout(()=>router.push('/'),2000)
+            })
+            .catch(function (error) {
+                console.log("Hello1")
+            // console.log(profdata)
+            // console.log(err)
+            // console.log(err.request)
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+              } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+              } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+              }
+              console.log(error.config);
+            //   toast.error(
+                // 'An account using same email or username is already created'
+            //   ,{position: "bottom-right"})
+            })
+        }
+      
     //   axios.post("https://reqres.in/api/login", {
     //     email: email,
     //     password: password
@@ -44,7 +107,7 @@ export default function Register() {
     //         console.log(error);
     //       }
     //     };
-    const postData = async (profdata) => {
+    // const postData = async (profdata) => {
     //     try {
     //       const response = await axios.post("http://127.0.0.1:8000/auth/createuser/", userData);
     //       console.log(response);
@@ -52,42 +115,42 @@ export default function Register() {
     //       console.log(error);
     //     }
     //   };
-        axios({
-            url:"https://itachi2003.pythonanywhere.com/auth/createuser/",
-            method:'post',
-            data: profdata,
-        })
-        .then((res)=>{
-            console.log(res)
-            console.log("Hello2")
-            console.log("Jai Mata Di")
-            // window.sessionStorage.setItem('registered_email', res.data.email);
-            // window.sessionStorage.setItem('profileData', JSON.stringify(res.data));
-            // navigate('/');
-        })
-        .catch((error)=>{
-            console.log("Hello1")
-            console.log(profdata)
-            // console.log(err)
-            // console.log(err.request)
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-              } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-              } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-              }
-              console.log(error.config);
-        })
-    }
+    //     axios({
+    //         url:"https://itachi2003.pythonanywhere.com/auth/createuser/",
+    //         method:'post',
+    //         data: profdata,
+    //     })
+    //     .then((res)=>{
+    //         console.log(res)
+    //         console.log("Hello2")
+    //         console.log("Jai Mata Di")
+    //         // window.sessionStorage.setItem('registered_email', res.data.email);
+    //         // window.sessionStorage.setItem('profileData', JSON.stringify(res.data));
+    //         // navigate('/');
+    //     })
+    //     .catch((error)=>{
+    //         console.log("Hello1")
+    //         console.log(profdata)
+    //         // console.log(err)
+    //         // console.log(err.request)
+    //         if (error.response) {
+    //             // The request was made and the server responded with a status code
+    //             // that falls out of the range of 2xx
+    //             console.log(error.response.data);
+    //             console.log(error.response.status);
+    //             console.log(error.response.headers);
+    //           } else if (error.request) {
+    //             // The request was made but no response was received
+    //             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+    //             // http.ClientRequest in node.js
+    //             console.log(error.request);
+    //           } else {
+    //             // Something happened in setting up the request that triggered an Error
+    //             console.log('Error', error.message);
+    //           }
+    //           console.log(error.config);
+    //     })
+    // }
 
     return (
         <>
@@ -131,7 +194,7 @@ export default function Register() {
                                 dolorum aliquam, quibusdam aperiam voluptatum.
                             </p>
 
-                            <form action=" " onSubmit={handleSubmit((data) => postData(data))} class="mt-8 grid grid-cols-6 gap-6">
+                            <form action=" " class="mt-8 grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label
                                         for="FirstName"
@@ -142,6 +205,8 @@ export default function Register() {
 
                                     <input
                                         {...register('fname')}
+                                        value={fname}
+                                        onChange={(e) => setFname(e.target.value)}
                                         id="fname"
                                         name="fname"
                                         class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-white shadow-sm"
@@ -159,6 +224,8 @@ export default function Register() {
                                     <input
                                     {...register('lname')} 
                                         type="text"
+                                        value={lname}
+                                        onChange={(e) => setLname(e.target.value)}
                                         id="lname"
                                         name="lname"
                                         class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-white shadow-sm"
@@ -171,6 +238,8 @@ export default function Register() {
 
                                     <input
                                     {...register('username')}
+                                    value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                         type="name"
                                         id="username"
                                         name="username"
@@ -184,6 +253,8 @@ export default function Register() {
 
                                     <input
                                     {...register('email')} 
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         type="email"
                                         id="email"
                                         name="email"
@@ -201,6 +272,8 @@ export default function Register() {
 
                                     <input
                                     {...register('pass1')}
+                                        value={pass1}
+                                        onChange={(e) => setPass1(e.target.value)}
                                         type="password"
                                         id="pass1"
                                         name="pass1"
@@ -218,27 +291,13 @@ export default function Register() {
 
                                     <input
                                     {...register('pass2')} 
+                                        value={pass2}
+                                        onChange={(e) => setPass2(e.target.value)}
                                         type="password"
                                         id="pass2"
                                         name="pass2"
                                         class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-white shadow-sm"
                                     />
-                                </div>
-
-                                <div class="col-span-6">
-                                    <label for="MarketingAccept" class="flex gap-4">
-                                        <input
-                                            type="checkbox"
-                                            id="MarketingAccept"
-                                            name="marketing_accept"
-                                            class="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
-                                        />
-
-                                        <span class="text-sm text-white">
-                                            I want to receive emails about events, product updates and
-                                            company announcements.
-                                        </span>
-                                    </label>
                                 </div>
 
                                 <div class="col-span-6">
@@ -253,7 +312,7 @@ export default function Register() {
                                 </div>
 
                                 <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                                <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded">
+                                <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded" type="submit"    onClick={registerDone}>
                                 Create Account
                             </button>
 
