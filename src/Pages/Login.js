@@ -19,7 +19,7 @@ export default function Login(){
         }
 
         axios.post(
-            'http://127.0.0.1:8000/auth/loginuser/',
+            'https://itachi2003.pythonanywhere.com/auth/loginuser/',
             dataForApiRequest,
           )
             .then(function ({ data, status }) {
