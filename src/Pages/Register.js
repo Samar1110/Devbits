@@ -53,7 +53,7 @@ export default function Register() {
     //     }
     //   };
         axios({
-            url:"http://itachi2003.pythonanywhere.com/auth/createuser/",
+            url:"https://itachi2003.pythonanywhere.com/auth/createuser/",
             method:'post',
             data: profdata,
         })
