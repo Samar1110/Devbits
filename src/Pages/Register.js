@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import Spline from '@splinetool/react-spline';
 import { useState } from "react";
 import Img1 from "../image/Logo (2).png"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Register() {
     const navigate = useNavigate();
@@ -51,13 +53,72 @@ export default function Register() {
           }
     
           axios.post(
-            'http://127.0.0.1:8000/auth/createuser/',
+            'https://itachi7.pythonanywhere.com/auth/createuser/',
             dataForApiRequest,
           )
             .then(function ({ data, status }) {
               console.log(data);
-              console.log("Hello2");
-              console.log("Jai Mata Di");
+              if(data==="Your user name must be under 10 characters"){
+                toast.error('Your user name must be under 10 characters', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/register')
+              }
+              if(data==="User name should only contain letters and numbers"){
+                toast.error('User name should only contain letters and numbers', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/register')
+              }
+              if(data==="Passwords do not match"){
+                toast.error('Passwords do not match', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/register')
+              }
+              if(data==="Username already taken"){
+                toast.error('Username already taken', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/register')
+              }
+              if(data==="This email has already been taken"){
+                toast.error('This email has already been taken', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/register')
+              }
+              if(data==="User Created"){
+                toast.success('User Created', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/login')
+              }
+              if(data==="Try again"){
+                toast.error('Try again', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/register')
+              }
+              toast.success('User Created', {
+                theme: 'dark',
+                position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                autoClose: 1200
+              });
               navigate('/login')
               //   setToken(data.token)
               //   toast.success("Registered Successfully...",{position: "bottom-right",autoClose: 2000})
@@ -92,7 +153,7 @@ export default function Register() {
 
     return (
         <>
-
+        <ToastContainer />
             <section class="bg-white">
                 <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
                     <aside
@@ -103,7 +164,7 @@ export default function Register() {
 
                     <main
                         aria-label="Main"
-                        class="flex bg-black items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6"
+                        class="flex bg-black items-center justify-center  sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6"
                     >
                         <div class="max-w-xl lg:max-w-3xl">
                             <a class="block text-white" href="/">

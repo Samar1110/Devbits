@@ -10,6 +10,8 @@ import Stock from './Pages/Stocks';
 import StockInfo from './components/StockInfo';
 import Cart from './Pages/Cart';
 import News from './components/News';
+import Watchlist from './components/Watchlist';
+// import {Ripple} from 'react-preloaders';
 
 import './App.css';
 
@@ -25,6 +27,7 @@ function App() {
       <Route path="/stockinfo/:id" element={<StockInfo/>} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/news" element={<News />} />
+      <Route path="/watchlist" element={<Watchlist />} />
     </Routes>
 
     

@@ -43,8 +43,8 @@ export default function Contact() {
                             <textarea rows="3" className="block w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-emerald-600 bg-gray-100"></textarea>
                         </label>
                         <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded">
-                                Submit
-                            </button>
+                            Submit
+                        </button>
                     </form>
                 </div>
             </section>

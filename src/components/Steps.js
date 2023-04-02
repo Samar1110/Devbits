@@ -1,5 +1,9 @@
 import React from "react"
 import img from "../image/image-removebg-preview (1).png"
+import { Shake } from 'reshake'
+
+
+
 export default function Steps() {
     return (
         <>
@@ -15,6 +19,7 @@ export default function Steps() {
                                 <h3 className="text-2xl font-bold tracking-tight sm:text-3xl text-white">Start Trading </h3>
                                 <p className="mt-3 text-lg text-white-500">In 4 Easy Steps</p>
                                 <div className="mt-12 space-y-12">
+
                                     <div className="flex">
                                         <div className="flex-shrink-0">
                                             <div className="flex items-center justify-center w-12 h-12 rounded-md bg-emerald-600 text-[#6ede8a]">
@@ -73,8 +78,21 @@ export default function Steps() {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="mt-10 lg:mt-0 lg:col-start-1 lg:row-start-1">
-                                <img src={img} alt="" className="mx-auto rounded-lg shadow-lg bg-gray-500" />
+                                <Shake
+                                    h={0}
+                                    v={50}
+                                    r={0}
+                                    dur={750}
+                                    int={66.5}
+                                    max={100}
+                                    fixed={true}
+                                    fixedStop={false}
+                                    freez={false}>
+                                    <img src={img} alt="" className="mx-auto rounded-lg shadow-lg bg-gray-500" />
+                                </Shake>
+
                             </div>
                         </div>
                     </div>

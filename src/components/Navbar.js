@@ -1,13 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { FaShoppingCart } from 'react-icons/fa';
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyNav() {
 
   var user_email = window.sessionStorage.getItem('registered_email');
 
+  const navigate = useNavigate()
+  const handleSubmit = (e) => {
+    sessionStorage.removeItem("registered_email");
+    toast.success('Logged Out Succesfully', {
+      theme: 'dark',
+      position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+      autoClose: 1200
+    });
+    navigate('/')
+  }
   return (
     <>
+      <ToastContainer />
+
       <div className="navbar bg-black text-white sticky z-[2000] ">
         <div className="navbar-start sticky z-[2000]">
           <div className="dropdown">
@@ -28,6 +41,16 @@ export default function MyNav() {
               <li>
                 <Link to='/stock'>
                   News
+                </Link>
+              </li>
+              <li>
+                <Link to='/dashboard'>
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link to="/watchlist">
+                  Watchlist
                 </Link>
               </li>
             </ul>
@@ -52,26 +75,17 @@ export default function MyNav() {
               <Link to='/news'>
                 News
               </Link>
+              <Link to="/dashboard">
+                Dashboard
+              </Link>
+              <Link to="/watchlist">
+                Watchlist
+              </Link>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          {
-            user_email == null ? <div>
-              <div className="btn mr-1 text-sm text-white">
-                <Link to='/login'>
-                  <FaShoppingCart />
-                </Link>
-              </div>
-            </div>
-              :
-              <div className=" mt-1 mr-4 text-white">
-                <Link to="/cart">
-                  <FaShoppingCart />
-                </Link>
 
-              </div>
-          }
           {user_email == null ? <div>
             <div className="btn mr-1 text-sm text-white">
               <Link to='/login'>
@@ -84,15 +98,21 @@ export default function MyNav() {
               </Link>
             </div>
           </div>
-            :
-            <div className="avatar">
-              <div className="w-10 rounded-full">
-                <Link to="/dashboard">
-                  <img src="https://i.pinimg.com/564x/84/d9/2e/84d92ea864699e749a8c36c32af845cc.jpg" />
-                </Link>
+            : <>
+              <div className="btn mr-1 text-sm text-white" onClick={handleSubmit}>
+                Logout
               </div>
+              <div className="avatar">
+                <div className="w-10 rounded-full">
 
-            </div>
+                  <Link to="/dashboard">
+                    <img src="https://i.pinimg.com/564x/84/d9/2e/84d92ea864699e749a8c36c32af845cc.jpg" />
+                  </Link>
+                </div>
+
+              </div>
+            </>
+
           }
 
 

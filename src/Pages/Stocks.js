@@ -11,17 +11,13 @@ import { Input, Button } from "@material-tailwind/react";
 const options = {
   method: "GET",
   url: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR&order=market_cap_desc&per_page=100&page=1&sparkline=false",
-  //   headers: {
-  //     'X-RapidAPI-Key': '236551598cmsh041c79dc13535cep1cb297jsn0344bd0922e5',
-  //     'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com'
-  //   }
 };
 
 export default function Stock() {
   useEffect(() => {
     fetchApi();
   }, []);
-  const [Price, setPrice] = React.useState("ashish");
+  const [Price, setPrice] = React.useState("");
   const [Stocks, setStocks] = React.useState([]);
   const [filterData, setFilterData] = useState(Stocks);
 
@@ -42,48 +38,25 @@ export default function Stock() {
         });
         setPrice(response.data);
         console.log(Stocks);
-        setFilterData(response.data)
+        setFilterData(response.data);
       })
       .catch(function (error) {
         console.error(error);
       });
   };
 
-  const [searchInput,setSearchInput]=useState(" ")
+  const [searchInput, setSearchInput] = useState("");
   const handleFilter = (e) => {
     e.preventDefault();
-    setSearchInput(e.target.value)
-    const newFilter=Stocks.filter((stock)=>{
-      return stock.name.includes(e.target.value);
-    })
-    console.log(newFilter)
-    if(newFilter.length>0)
-    setFilterData(newFilter)
-    else
-    setFilterData(Stocks)
-    // setSearchInput(e.target.value);
+    const newFilter = Stocks.filter((stock) => {
+      return stock.name.toLowerCase().includes(searchInput.toLowerCase());
+    });
+    console.log(newFilter);
+    if (newFilter.length > 0) setFilterData(newFilter);
+    else setFilterData(Stocks);
   };
-  
-  var count=0;
-
-  // if (searchInput.length > 0) {
-  //   if(count===0){
-  //     setStocks(Stocks.filter((stock) => {
-  //       return stock.name.match(searchInput);
-  //   }))
-  //   count++;
-  //   }
-  //   else
-  //   count=0
-      
-  // }
-  // const [email, setEmail] = React.useState("");
-  // const onChange = ({ target }: any) => setEmail(target.value);
 
   console.log(Stocks);
-  // console.log(Stocks[0].img)
-  var key;
-
   return (
     <>
       <MyNav />
@@ -97,6 +70,7 @@ export default function Stock() {
                   <button
                     type="submit"
                     class="p-1 focus:outline-none focus:shadow-outline"
+                    onClick={handleFilter}
                   >
                     <svg
                       fill="none"
@@ -117,7 +91,9 @@ export default function Stock() {
                   class="py-2 text-sm pl-10 outline-none bg-white text-gray-900"
                   placeholder="Search..."
                   autocomplete="off"
-                  onChange={handleFilter}
+                  onChange={(e) => {
+                    setSearchInput(e.target.value);
+                  }}
                   value={searchInput}
                 />
               </div>
@@ -127,7 +103,7 @@ export default function Stock() {
       </div>
 
       <div>
-        <div class="flex items-center min-h-screen bg-black text-white">
+        <div class="flex items-center bg-black text-white">
           <div class="p-4 w-full">
             <div class="grid grid-cols-12 gap-3">
               {filterData.map((stock) => (
@@ -167,77 +143,3 @@ export default function Stock() {
     </>
   );
 }
-
-// import React from 'react';
-// import Plot from 'react-plotly.js';
-
-// class Services extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       stockChartXValues: [],
-//       stockChartYValues: []
-//     }
-//   }
-
-//   componentDidMount() {
-//     this.fetchStock();
-//   }
-
-//   fetchStock() {
-//     const pointerToThis = this;
-//     console.log(pointerToThis);
-//     const API_KEY = '1QNWA30TWRMAJXHZ';
-//     let StockSymbol = 'IBM';
-//     let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=5min&apikey=${API_KEY}`
-//     // let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=5min&outputsize=full&apikey=${API_KEY}`;
-//     // let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${StockSymbol}&outputsize=compact&apikey=${API_KEY}`;
-//     let stockChartXValuesFunction = [];
-//     let stockChartYValuesFunction = [];
-
-//     fetch(API_Call)
-//       .then(
-//         function(response) {
-//           return response.json();
-//         }
-//       )
-//       .then(
-//         function(data) {
-//           console.log(data);
-
-//           for (var key in data['Time Series (5min)']) {
-//             stockChartXValuesFunction.push(key);
-//             stockChartYValuesFunction.push(data['Time Series (5min)'][key]['1. open']);
-//           }
-
-//           // console.log(stockChartXValuesFunction);
-//           pointerToThis.setState({
-//             stockChartXValues: stockChartXValuesFunction,
-//             stockChartYValues: stockChartYValuesFunction
-//           });
-//         }
-//       )
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>Stock Market</h1>
-//         <Plot
-//           data={[
-//             {
-//               x: this.state.stockChartXValues,
-//               y: this.state.stockChartYValues,
-//               type: 'scatter',
-//               mode: 'lines+markers',
-//               marker: {color: 'red'},
-//             }
-//           ]}
-//           layout={{width: 720, height: 440, title: 'A Fancy Plot'}}
-//         />
-//       </div>
-//     )
-//   }
-// }
-
-// export default Services;

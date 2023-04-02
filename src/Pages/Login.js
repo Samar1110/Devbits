@@ -5,6 +5,10 @@ import axios from "axios";
 import Img1 from "../image/Logo (2).png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 export default function Login(){
 
     const navigate=useNavigate();
@@ -19,13 +23,31 @@ export default function Login(){
         }
 
         axios.post(
-            'http://127.0.0.1:8000/auth/loginuser/',
+            'https://itachi7.pythonanywhere.com/auth/loginuser/',
             dataForApiRequest,
           )
             .then(function ({ data, status }) {
               console.log(data);
+              if(data==='PAwry'){
+                toast.success('Logged In Succesfully', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/')
+              }
+              else{
+                toast.error('Try Again', {
+                    theme: 'dark',
+                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                    autoClose: 1200
+                  });
+                  navigate('/login')
+              }
               console.log("Hello2");
               console.log("OP");
+              
+              console.log(status)
             //   console.log()
             //   var user_email=window.sessionStorage.getItem('registered_email');
             //   console.log("Hello1")
@@ -36,7 +58,7 @@ export default function Login(){
               console.log(user_email2)
 
 
-              navigate('/')
+              
 
               //   setToken(data.token)
               //   toast.success("Registered Successfully...",{position: "bottom-right",autoClose: 2000})
@@ -70,17 +92,21 @@ export default function Login(){
     }
     return(
         <>
+        <ToastContainer/>
         <section class="bg-white">
                 <div class="lg:grid lg:min-h-screen lg:grid-cols-12 ">
                     <aside
-                        class="relative block  h-16 lg:order-last lg:col-span-5  lg:h-full xl:col-span-6 sm:pt-24"
+                        class="relative block   h-16 lg:order-last lg:col-span-5  lg:h-full xl:col-span-6 "
                     >
-                        <Spline scene="https://prod.spline.design/icSMIsUvslU8capY/scene.splinecode" />
+                        {/* <div className="sm:pt-4"> */}
+
+                           <Spline scene="https://prod.spline.design/icSMIsUvslU8capY/scene.splinecode" />
+                        {/* </div> */}
                     </aside>
 
                     <main
                         aria-label="Main"
-                        class="flex bg-black text-white items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6"
+                        class="flex bg-black text-white items-center justify-center sm:px-20 sm:pb-20px lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6"
                     >
                         <div class="max-w-xl lg:max-w-3xl">
                             <a class="block text-white" href="/">

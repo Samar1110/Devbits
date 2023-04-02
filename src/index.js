@@ -9,11 +9,11 @@ import { ThemeProvider } from "@material-tailwind/react";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-  <React.StrictMode>
+  {/* <React.StrictMode> */}
     <ThemeProvider>
       <App />
     </ThemeProvider>
-  </React.StrictMode>
+  {/* </React.StrictMode> */}
   </BrowserRouter>
   
 );
