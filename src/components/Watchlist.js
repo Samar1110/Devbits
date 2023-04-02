@@ -36,12 +36,12 @@ const Watchlist = () => {
     useEffect(() => {
         axios.request(options).then(function (response) {
             console.log(response.data);
-            var ans=[]
-            response.data.map((e)=>{
-                if(e.stock_user_email==user_email)
-                ans.push(e)
+            var ans = []
+            response.data.map((e) => {
+                if (e.stock_user_email == user_email)
+                    ans.push(e)
             })
- 
+
             const promises = ans.map((e) => {
                 return axios.get(`https://api.coingecko.com/api/v3/coins/${e.stock_name}`);
             });
@@ -83,9 +83,9 @@ const Watchlist = () => {
                         {watchlist.map(function (stock, i) {
                             return (
                                 <>
-                                {stock.name!=="2"&&<UserWatchStock key={i} stock={stock} />}
+                                    {stock.name !== "2" && <UserWatchStock key={i} stock={stock} />}
                                 </>
-                                
+
                             );
                         })}
                     </div>

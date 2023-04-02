@@ -21,139 +21,139 @@ export default function Register() {
         handleSubmit
         // watch,
         // formState: { errors }
-      } = useForm();
-      register("fname")
-      register("lname")
-      register("username")
-      register("pass1")
-      register("pass2")
-      register("email")
-      const [fname, setFname] = useState('')
-      const [lname, setLname] = useState('')
-      const [email, setEmail] = useState('')
-      const [pass1, setPass1] = useState('')
-      const [pass2, setPass2] = useState('')
-      const [username, setUsername] = useState('')
-      const registerDone = (e) => {
+    } = useForm();
+    register("fname")
+    register("lname")
+    register("username")
+    register("pass1")
+    register("pass2")
+    register("email")
+    const [fname, setFname] = useState('')
+    const [lname, setLname] = useState('')
+    const [email, setEmail] = useState('')
+    const [pass1, setPass1] = useState('')
+    const [pass2, setPass2] = useState('')
+    const [username, setUsername] = useState('')
+    const registerDone = (e) => {
         e.preventDefault()
-    
+
         // if (
         //   registerFieldsAreValid(firstName, lastName, email, username, password)
         // ) {
         //   console.log('Please wait...')
-    
-          const dataForApiRequest = {
+
+        const dataForApiRequest = {
             fname: fname,
             lname: lname,
             email: email,
             username: username,
-            pass1:pass1,
-            pass2:pass2,
+            pass1: pass1,
+            pass2: pass2,
             // password: password,
-          }
-    
-          axios.post(
+        }
+
+        axios.post(
             'https://itachi7.pythonanywhere.com/auth/createuser/',
             dataForApiRequest,
-          )
+        )
             .then(function ({ data, status }) {
-              console.log(data);
-              if(data==="Your user name must be under 10 characters"){
-                toast.error('Your user name must be under 10 characters', {
-                    theme: 'dark',
-                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
-                    autoClose: 1200
-                  });
-                  navigate('/register')
-              }
-              if(data==="User name should only contain letters and numbers"){
-                toast.error('User name should only contain letters and numbers', {
-                    theme: 'dark',
-                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
-                    autoClose: 1200
-                  });
-                  navigate('/register')
-              }
-              if(data==="Passwords do not match"){
-                toast.error('Passwords do not match', {
-                    theme: 'dark',
-                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
-                    autoClose: 1200
-                  });
-                  navigate('/register')
-              }
-              if(data==="Username already taken"){
-                toast.error('Username already taken', {
-                    theme: 'dark',
-                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
-                    autoClose: 1200
-                  });
-                  navigate('/register')
-              }
-              if(data==="This email has already been taken"){
-                toast.error('This email has already been taken', {
-                    theme: 'dark',
-                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
-                    autoClose: 1200
-                  });
-                  navigate('/register')
-              }
-              if(data==="User Created"){
+                console.log(data);
+                if (data === "Your user name must be under 10 characters") {
+                    toast.error('Your user name must be under 10 characters', {
+                        theme: 'dark',
+                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                        autoClose: 1200
+                    });
+                    navigate('/register')
+                }
+                if (data === "User name should only contain letters and numbers") {
+                    toast.error('User name should only contain letters and numbers', {
+                        theme: 'dark',
+                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                        autoClose: 1200
+                    });
+                    navigate('/register')
+                }
+                if (data === "Passwords do not match") {
+                    toast.error('Passwords do not match', {
+                        theme: 'dark',
+                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                        autoClose: 1200
+                    });
+                    navigate('/register')
+                }
+                if (data === "Username already taken") {
+                    toast.error('Username already taken', {
+                        theme: 'dark',
+                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                        autoClose: 1200
+                    });
+                    navigate('/register')
+                }
+                if (data === "This email has already been taken") {
+                    toast.error('This email has already been taken', {
+                        theme: 'dark',
+                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                        autoClose: 1200
+                    });
+                    navigate('/register')
+                }
+                if (data === "User Created") {
+                    toast.success('User Created', {
+                        theme: 'dark',
+                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                        autoClose: 1200
+                    });
+                    navigate('/login')
+                }
+                if (data === "Try again") {
+                    toast.error('Try again', {
+                        theme: 'dark',
+                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                        autoClose: 1200
+                    });
+                    navigate('/register')
+                }
                 toast.success('User Created', {
                     theme: 'dark',
                     position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
                     autoClose: 1200
-                  });
-                  navigate('/login')
-              }
-              if(data==="Try again"){
-                toast.error('Try again', {
-                    theme: 'dark',
-                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
-                    autoClose: 1200
-                  });
-                  navigate('/register')
-              }
-              toast.success('User Created', {
-                theme: 'dark',
-                position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
-                autoClose: 1200
-              });
-              navigate('/login')
-              //   setToken(data.token)
-              //   toast.success("Registered Successfully...",{position: "bottom-right",autoClose: 2000})
-              //   setTimeout(()=>router.push('/'),2000)
+                });
+                navigate('/login')
+                //   setToken(data.token)
+                //   toast.success("Registered Successfully...",{position: "bottom-right",autoClose: 2000})
+                //   setTimeout(()=>router.push('/'),2000)
             })
             .catch(function (error) {
-              console.log("Hello1");
-              // console.log(profdata)
-              // console.log(err)
-              // console.log(err.request)
-              if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-              } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-              } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-              }
-              console.log(error.config);
-              //   toast.error(
-              // 'An account using same email or username is already created'
-              //   ,{position: "bottom-right"})
+                console.log("Hello1");
+                // console.log(profdata)
+                // console.log(err)
+                // console.log(err.request)
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                    // http.ClientRequest in node.js
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                }
+                console.log(error.config);
+                //   toast.error(
+                // 'An account using same email or username is already created'
+                //   ,{position: "bottom-right"})
             });
-        }   
+    }
 
     return (
         <>
-        <ToastContainer />
+            <ToastContainer />
             <section class="bg-white">
                 <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
                     <aside
@@ -168,23 +168,23 @@ export default function Register() {
                     >
                         <div class="max-w-xl lg:max-w-3xl">
                             <a class="block text-white" href="/">
-                            <div className="avatar">
-                                <div className="w-10 ">
-                                    <img src={Img1} />
-                                </div>
+                                <div className="avatar">
+                                    <div className="w-10 ">
+                                        <img src={Img1} />
+                                    </div>
 
-                            </div>
-                            {/* </a> */}
+                                </div>
+                                {/* </a> */}
                             </a>
 
                             <h1
                                 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl"
                             >
-                                Welcome to HawkFolio 
+                                Welcome to HawkFolio
                             </h1>
 
                             <p class="mt-4 leading-relaxed text-white">
-                            At HawkFolio, we're passionate about helping investors build better portfolios. We believe that 
+                                At HawkFolio, we're passionate about helping investors build better portfolios. We believe that
                                 investing should be simple and accessible to everyone.
                             </p>
 
@@ -216,7 +216,7 @@ export default function Register() {
                                     </label>
 
                                     <input
-                                    {...register('lname')} 
+                                        {...register('lname')}
                                         type="text"
                                         value={lname}
                                         onChange={(e) => setLname(e.target.value)}
@@ -231,8 +231,8 @@ export default function Register() {
                                     </label>
 
                                     <input
-                                    {...register('username')}
-                                    value={username}
+                                        {...register('username')}
+                                        value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                         type="name"
                                         id="username"
@@ -246,7 +246,7 @@ export default function Register() {
                                     </label>
 
                                     <input
-                                    {...register('email')} 
+                                        {...register('email')}
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         type="email"
@@ -265,7 +265,7 @@ export default function Register() {
                                     </label>
 
                                     <input
-                                    {...register('pass1')}
+                                        {...register('pass1')}
                                         value={pass1}
                                         onChange={(e) => setPass1(e.target.value)}
                                         type="password"
@@ -284,7 +284,7 @@ export default function Register() {
                                     </label>
 
                                     <input
-                                    {...register('pass2')} 
+                                        {...register('pass2')}
                                         value={pass2}
                                         onChange={(e) => setPass2(e.target.value)}
                                         type="password"
@@ -306,14 +306,14 @@ export default function Register() {
                                 </div>
 
                                 <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                                <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded" type="submit"    onClick={registerDone}>
-                                Create Account
-                            </button>
+                                    <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded" type="submit" onClick={registerDone}>
+                                        Create Account
+                                    </button>
 
                                     <p class="mt-4 text-sm text-white sm:mt-0">
                                         Already have an account?
                                         <Link to="/login">
-                                        <a href="#" class="text-white underline">Log in</a>.
+                                            <a href="#" class="text-white underline">Log in</a>.
                                         </Link>
                                     </p>
                                 </div>

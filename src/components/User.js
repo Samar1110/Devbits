@@ -226,7 +226,7 @@ export default function User() {
                                                 <h3 class="text-base font-normal text-gray-500">Sales this week</h3>
                                             </div>
                                             <div class="flex items-center justify-end flex-1 text-green-500 text-base font-bold">
-                                                %{((userProfit / 1000000) - 1) * 100? <div class="text-lg text-[#38b000]"> 📈 {((userProfit / 1000000) - 1).toFixed(2)}</div> : <div class="text-lg text-[#e5383b]">📉 {((userProfit / 1000000) - 1).toFixed(2)}</div>}
+                                                %{((userProfit / 1000000) - 1) * 100 ? <div class="text-lg text-[#38b000]"> 📈 {((userProfit / 1000000) - 1).toFixed(2)}</div> : <div class="text-lg text-[#e5383b]">📉 {((userProfit / 1000000) - 1).toFixed(2)}</div>}
 
                                             </div>
                                         </div>
