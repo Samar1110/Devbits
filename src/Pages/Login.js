@@ -23,7 +23,7 @@ export default function Login() {
         }
 
         axios.post(
-            'https://itachi7.pythonanywhere.com/auth/loginuser/',
+            'https://itachi7.pythonanywhere.com/loginuser/',
             dataForApiRequest,
         )
             .then(function ({ data, status }) {

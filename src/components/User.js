@@ -52,9 +52,9 @@ export default function User() {
     useEffect(() => {
         axios.request(options1).then(function (response) {
             // console.log(request.data)
-            console.log("Please Bhai Hoja")
-            console.log(response.data);
-            console.log("Please Bhai")
+            // console.log("Please Bhai Hoja")
+            // console.log(response.data);
+            // console.log("Please Bhai")
             setUserStockData(response.data);
             var data = new Map()
             response.data.map((e) => {
@@ -77,15 +77,32 @@ export default function User() {
             });
             setUserProfit(sum)
             // var uSt=data
-            console.log(data)
+            // console.log(data)
             setUserGraphData(data);
             // console.log(value);
         }).catch(function (error) {
             console.error(error);
         });
     }, [])
+    
+    const options2 = {
+        method: 'GET',
+        url: "https://itachi7.pythonanywhere.com/userInfo/",
+    };
+    useEffect(() => {
+        axios.request(options2).then(function (response) {
+            response.data.map((e) => {
+                if (e.email === user_email) {
+                    setUserInfo(e)
+                }
+            })
+            
+        }).catch(function (error) {
+            console.error(error);
+        });
+    }, [])
     console.log(stockUserData)
-    console.log(userInfo)
+    console.log(userInfo.usermoney)
     // const options3={
     //     method
     // } https://api.coingecko.com/api/v3/coins/${id}
@@ -220,15 +237,24 @@ export default function User() {
                                         </div>
                                     </div>
                                     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
+                                        <div class="flex-shrink-0">
+                                            <span class="text-lg leading-none font-bold text-gray-900">Current Balance in Account :</span>
+                                            <h3 class="text-lg font-normal text-gray-500 mb-5">{userInfo.usermoney}</h3>
+                                        </div>
                                         <div class="flex items-center justify-between mb-4">
+
                                             <div class="flex-shrink-0">
                                                 <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">$ {userProfit}</span>
                                                 <h3 class="text-base font-normal text-gray-500">Sales this week</h3>
                                             </div>
-                                            <div class="flex items-center justify-end flex-1 text-green-500 text-base font-bold">
-                                                %{((userProfit / 1000000) - 1) * 100 ? <div class="text-lg text-[#38b000]"> 📈 {((userProfit / 1000000) - 1).toFixed(2)}</div> : <div class="text-lg text-[#e5383b]">📉 {((userProfit / 1000000) - 1).toFixed(2)}</div>}
+                                            {/* <div class="flex items-center justify-end flex-1 text-green-500 text-base font-bold">
+                                                %{((userInfo.usermoney / 1000000) - 1) * 100 ? <div class="text-lg text-[#38b000]"> 📈 {((userInfo.usermoney / 1000000) - 1).toFixed(2)}</div> : <div class="text-lg text-[#e5383b]">📉 {((userInfo.usermoney / 1000000) - 1).toFixed(2)}</div>}
 
-                                            </div>
+                                            </div> */}
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <span class="text-sm leading-none font-bold text-gray-900">User Percentage Change in money :</span>
+                                            <h3 class="text-lg font-normal text-gray-500 mb-5">{((userInfo.usermoney / 1000000) - 1) * 100 ? <div class="text-lg text-[#38b000]"> 📈 {((userInfo.usermoney / 1000000) - 1).toFixed(2)}%</div> : <div class="text-lg text-[#e5383b]">📉 {((userInfo.usermoney / 1000000) - 1).toFixed(2)}%</div>}</h3>
                                         </div>
                                         <div id="main-chart">
                                             <CircleChat userGraphData={userGraphData} />
