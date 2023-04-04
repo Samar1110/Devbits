@@ -30,7 +30,7 @@ const Watchlist = () => {
     ])
     const options = {
         method: 'GET',
-        url: "http://itachi7.pythonanywhere.com/watchlist/",
+        url: "https://itachi7.pythonanywhere.com//watchlist/",
     };
 
     useEffect(() => {

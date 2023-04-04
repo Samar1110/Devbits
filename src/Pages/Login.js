@@ -55,7 +55,7 @@ export default function Login() {
                         console.log("YO")
 
                         axios.post(
-                            'http://itachi7.pythonanywhere.com/loginuser/',
+                            'https://itachi7.pythonanywhere.com//loginuser/',
                             dataForApiRequest,
                         )
                             .then(function ({ data, status }) {
@@ -144,7 +144,7 @@ export default function Login() {
         }
 
         axios.post(
-            'http://itachi7.pythonanywhere.com/loginuser/',
+            'https://itachi7.pythonanywhere.com//loginuser/',
             dataForApiRequest,
         )
             .then(function ({ data, status }) {
