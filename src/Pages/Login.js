@@ -1,17 +1,138 @@
 import React from "react";
 import Spline from '@splinetool/react-spline';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Img1 from "../image/Logo (2).png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 export default function Login() {
 
     const navigate = useNavigate();
+
+    const [profile, setProfile] = useState([]);
+    const [user, setUser] = useState([]);
+    const onSuccess = (codeResponse) => {
+        setUser(codeResponse);
+        console.log(user);
+        console.log("Hello");
+    };
+
+    const onError = (error) => {
+        console.log('Login Failed:', error);
+        console.log("Hello");
+    };
+
+    const signIn = useGoogleLogin({
+        onSuccess,
+        onFailure: onError,
+    });
+
+    const login = (e) => {
+        e.preventDefault();
+        signIn();
+    };
+
+    useEffect(
+        () => {
+            if (user && user.access_token) {
+                axios
+                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                        headers: {
+                            Authorization: `Bearer ${user.access_token}`,
+                            Accept: 'application/json'
+                        }
+                    })
+                    .then((res) => {
+                        setProfile(res.data);
+                        const dataForApiRequest = {
+                            email: res.data.email,
+                            password: res.data.id,
+                        }
+                        console.log("YO")
+
+                        axios.post(
+                            'http://itachi7.pythonanywhere.com/loginuser/',
+                            dataForApiRequest,
+                        )
+                            .then(function ({ data, status }) {
+                                console.log(data);
+                                if (data === 'PAwry') {
+                                    toast.success('Logged In Succesfully', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    window.sessionStorage.setItem('registered_email', res.data.email);
+                                    var user_email2 = window.sessionStorage.getItem('registered_email');
+                                    console.log("Hello2")
+                                    console.log(user_email2)
+                                    navigate('/')
+                                }
+                                else {
+                                    toast.error('Try a different Username or Password', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    navigate('/login')
+                                }
+                                console.log("Hello2");
+                                console.log("OP");
+
+                                console.log(status)
+                                //   console.log()
+                                //   var user_email=window.sessionStorage.getItem('registered_email');
+                                //   console.log("Hello1")
+                                //   console.log(user_email)
+
+
+
+
+
+                                //   setToken(data.token)
+                                //   toast.success("Registered Successfully...",{position: "bottom-right",autoClose: 2000})
+                                //   setTimeout(()=>router.push('/'),2000)
+                            })
+                            .catch(function (error) {
+                                console.log("Hello1");
+                                // console.log(profdata)
+                                // console.log(err)
+                                // console.log(err.request)
+                                if (error.response) {
+                                    // The request was made and the server responded with a status code
+                                    // that falls out of the range of 2xx
+                                    console.log(error.response.data);
+                                    console.log(error.response.status);
+                                    console.log(error.response.headers);
+                                } else if (error.request) {
+                                    // The request was made but no response was received
+                                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                                    // http.ClientRequest in node.js
+                                    console.log(error.request);
+                                } else {
+                                    // Something happened in setting up the request that triggered an Error
+                                    console.log('Error', error.message);
+                                }
+                                console.log(error.config);
+                                //   toast.error(
+                                // 'An account using same email or username is already created'
+                                //   ,{position: "bottom-right"})
+                            });
+
+                    })
+                    .catch((err) => console.log(err));
+            }
+        },
+        [user]
+    );
+    console.log(profile)
+    console.log(user.access_token)
+    console.log(user)
+
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -23,7 +144,7 @@ export default function Login() {
         }
 
         axios.post(
-            'https://itachi7.pythonanywhere.com/loginuser/',
+            'http://itachi7.pythonanywhere.com/loginuser/',
             dataForApiRequest,
         )
             .then(function ({ data, status }) {
@@ -34,6 +155,10 @@ export default function Login() {
                         position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
                         autoClose: 1200
                     });
+                    window.sessionStorage.setItem('registered_email', email);
+                    var user_email2 = window.sessionStorage.getItem('registered_email');
+                    console.log("Hello2")
+                    console.log(user_email2)
                     navigate('/')
                 }
                 else {
@@ -52,10 +177,7 @@ export default function Login() {
                 //   var user_email=window.sessionStorage.getItem('registered_email');
                 //   console.log("Hello1")
                 //   console.log(user_email)
-                window.sessionStorage.setItem('registered_email', email);
-                var user_email2 = window.sessionStorage.getItem('registered_email');
-                console.log("Hello2")
-                console.log(user_email2)
+
 
 
 
@@ -66,9 +188,6 @@ export default function Login() {
             })
             .catch(function (error) {
                 console.log("Hello1");
-                // console.log(profdata)
-                // console.log(err)
-                // console.log(err.request)
                 if (error.response) {
                     // The request was made and the server responded with a status code
                     // that falls out of the range of 2xx
@@ -174,6 +293,13 @@ export default function Login() {
                                         </p>
                                     </Link>
 
+                                </div>
+                                <div class="col-span-6">
+                                    <div id="signInDiv">
+                                        <div class="px-6 sm:px-0 max-w-sm">
+                                            <button type="button" onClick={login}  class="text-black w-full  bg-white hover:bg-white/90 focus:ring-4 focus:outline-none focus:ring-white/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-white/55 mr-2 mb-2"><svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>Login in with Google<div></div></button>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>

@@ -5,17 +5,20 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from "@material-tailwind/react";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-  {/* <React.StrictMode> */}
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  {/* </React.StrictMode> */}
+    <GoogleOAuthProvider clientId="342336333938-634s2viseqp9klc1uo1me6om2asebh6f.apps.googleusercontent.com">
+      {/* <React.StrictMode> */}
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </GoogleOAuthProvider>
+    {/* </React.StrictMode> */}
   </BrowserRouter>
-  
+
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -10,12 +10,175 @@ import { useState } from "react";
 import Img1 from "../image/Logo (2).png"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 export default function Register() {
     const navigate = useNavigate();
-    // useEffect(() => {
-    //     postData();
-    //   }, []);
+    const [profile, setProfile] = useState([]);
+    const [user, setUser] = useState([]);
+
+
+
+    const onSuccess = (codeResponse) => {
+        setUser(codeResponse);
+        console.log(user);
+        console.log("Hello");
+    };
+
+    const onError = (error) => {
+        console.log('Login Failed:', error);
+        console.log("Hello");
+    };
+
+    const signIn = useGoogleLogin({
+        onSuccess,
+        onFailure: onError,
+    });
+
+    const login = (e) => {
+        e.preventDefault();
+        signIn();
+    };
+
+    useEffect(
+        () => {
+            if (user && user.access_token) {
+                axios
+                    .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+                        headers: {
+                            Authorization: `Bearer ${user.access_token}`,
+                            Accept: 'application/json'
+                        }
+                    })
+                    .then((res) => {
+                        setProfile(res.data);
+                        const dataForApiRequest = {
+                            fname: res.data.given_name,
+                            lname: res.data.family_name,
+                            email: res.data.email,
+                            username: res.data.name,
+                            pass1: res.data.id,
+                            pass2: res.data.id,
+                            // password: password,
+                        }
+                        console.log("YO")
+
+                        axios.post(
+                            'http://itachi7.pythonanywhere.com/createuser/',
+                            dataForApiRequest,
+                        )
+                            .then(function ({ data, status }) {
+                                console.log(data);
+                                if (data === "Your user name must be under 10 characters") {
+                                    toast.error('Your user name must be under 10 characters', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    navigate('/register')
+                                }
+                                if (data === "User name should only contain letters and numbers") {
+                                    toast.error('User name should only contain letters and numbers', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    navigate('/register')
+                                }
+                                if (data === "Passwords do not match") {
+                                    toast.error('Passwords do not match', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    navigate('/register')
+                                }
+                                if (data === "Username already taken") {
+                                    toast.error('Username already taken', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    navigate('/register')
+                                }
+                                if (data === "This email has already been taken") {
+                                    toast.error('This email has already been taken', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    navigate('/register')
+                                }
+                                if (data === "User Created") {
+                                    console.log("Finally Done")
+                                    toast.success('User Created', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    navigate('/login')
+                                }
+                                if (data === "Try again") {
+                                    toast.error('Try again', {
+                                        theme: 'dark',
+                                        position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                        autoClose: 1200
+                                    });
+                                    navigate('/register')
+                                }
+                                toast.success('User Created', {
+                                    theme: 'dark',
+                                    position: window.innerWidth < 600 ? toast.POSITION.BOTTOM_CENTER : toast.POSITION.TOP_RIGHT,
+                                    autoClose: 1200
+                                });
+                                navigate('/login')
+                                //   setToken(data.token)
+                                //   toast.success("Registered Successfully...",{position: "bottom-right",autoClose: 2000})
+                                //   setTimeout(()=>router.push('/'),2000)
+                            })
+                            .catch(function (error) {
+                                console.log("Hello1");
+                                // console.log(profdata)
+                                // console.log(err)
+                                // console.log(err.request)
+                                if (error.response) {
+                                    // The request was made and the server responded with a status code
+                                    // that falls out of the range of 2xx
+                                    console.log(error.response.data);
+                                    console.log(error.response.status);
+                                    console.log(error.response.headers);
+                                } else if (error.request) {
+                                    // The request was made but no response was received
+                                    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                                    // http.ClientRequest in node.js
+                                    console.log(error.request);
+                                } else {
+                                    // Something happened in setting up the request that triggered an Error
+                                    console.log('Error', error.message);
+                                }
+                                console.log(error.config);
+                                //   toast.error(
+                                // 'An account using same email or username is already created'
+                                //   ,{position: "bottom-right"})
+                            });
+
+                    })
+                    .catch((err) => console.log(err));
+            }
+        },
+        [user]
+    );
+
+    // log out function to log the user out of google and set the profile array to null
+    const logOut = () => {
+        googleLogout();
+        setProfile(null);
+    };
+    console.log(profile)
+    console.log(user.access_token)
+    console.log(user)
+
+
     const {
         register,
         handleSubmit
@@ -34,6 +197,9 @@ export default function Register() {
     const [pass1, setPass1] = useState('')
     const [pass2, setPass2] = useState('')
     const [username, setUsername] = useState('')
+
+
+
     const registerDone = (e) => {
         e.preventDefault()
 
@@ -53,7 +219,7 @@ export default function Register() {
         }
 
         axios.post(
-            'https://itachi7.pythonanywhere.com/auth/createuser/',
+            'http://itachi7.pythonanywhere.com/createuser/',
             dataForApiRequest,
         )
             .then(function ({ data, status }) {
@@ -150,6 +316,8 @@ export default function Register() {
                 //   ,{position: "bottom-right"})
             });
     }
+
+
 
     return (
         <>
@@ -305,6 +473,7 @@ export default function Register() {
                                     </p>
                                 </div>
 
+
                                 <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
                                     <button class="bg-transparent hover:bg-white text-white font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded" type="submit" onClick={registerDone}>
                                         Create Account
@@ -317,6 +486,16 @@ export default function Register() {
                                         </Link>
                                     </p>
                                 </div>
+
+                                <div class="col-span-6">
+                                    <div id="signInDiv">
+                                        <div class="px-6 sm:px-0 max-w-sm">
+                                            <button type="button" onClick={login}  class="text-black w-full  bg-white hover:bg-white/90 focus:ring-4 focus:outline-none focus:ring-white/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-white/55 mr-2 mb-2"><svg class="mr-2 -ml-1 w-4 h-4" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>Sign up with Google<div></div></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
                             </form>
                         </div>
                     </main>

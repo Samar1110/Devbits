@@ -47,7 +47,7 @@ export default function User() {
 
     const options1 = {
         method: 'GET',
-        url: "https://itachi7.pythonanywhere.com/auth/addStock/",
+        url: "http://itachi7.pythonanywhere.com/addStock/",
     };
     useEffect(() => {
         axios.request(options1).then(function (response) {
@@ -87,7 +87,7 @@ export default function User() {
     
     const options2 = {
         method: 'GET',
-        url: "https://itachi7.pythonanywhere.com/userInfo/",
+        url: "http://127.0.0.1:8000/userInfo/",
     };
     useEffect(() => {
         axios.request(options2).then(function (response) {

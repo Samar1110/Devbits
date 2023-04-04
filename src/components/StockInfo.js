@@ -73,7 +73,7 @@ const StockInfo = (props) => {
       // password: password,
     }
     axios.post(
-      'https://itachi7.pythonanywhere.com/auth/addStock/',
+      'http://itachi7.pythonanywhere.com/addStock/',
       dataForApiRequest,
     )
       .then(function ({ data, status }) {
@@ -119,7 +119,7 @@ const StockInfo = (props) => {
       // password: password,
     }
     axios.post(
-      'https://itachi7.pythonanywhere.com/auth/watchlist/',
+      'http://itachi7.pythonanywhere.com/watchlist/',
       dataForApiRequest,
     ).then(function ({ data, status }) {
       console.log(data);
