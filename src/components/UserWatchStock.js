@@ -45,7 +45,7 @@ const UserWatchStock = (props) => {
     }
 
     axios.delete(
-      'https://itachi7.pythonanywhere.com/watchlist/', { data: { params: dataForApiRequest } }
+      'https://itachi7.pythonanywhere.com/auth/watchlist/', { data: { params: dataForApiRequest } }
     )
       .then(function ({ data, status }) {
         console.log(data);

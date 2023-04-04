@@ -57,7 +57,7 @@ export default function Sellstock() {
 
     const options1 = {
         method: 'GET',
-        url: "https://itachi7.pythonanywhere.com/addStock/",
+        url: "https://itachi7.pythonanywhere.com/auth/addStock/",
     };
 
 
@@ -160,7 +160,7 @@ export default function Sellstock() {
 
 
         axios.patch(
-            'https://itachi7.pythonanywhere.com/addStock/',
+            'https://itachi7.pythonanywhere.com/auth/addStock/',
             dataForApiRequest,
         )
             .then(function ({ data, status }) {

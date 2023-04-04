@@ -47,7 +47,7 @@ export default function User() {
 
     const options1 = {
         method: 'GET',
-        url: "https://itachi7.pythonanywhere.com/addStock/",
+        url: "https://itachi7.pythonanywhere.com/auth/addStock/",
     };
     useEffect(() => {
         axios.request(options1).then(function (response) {

@@ -8,7 +8,7 @@ function Shoppingcart() {
     const [stockData, setStockData] = useState([])
     const options = {
         method: 'GET',
-        url: "https://itachi7.pythonanywhere.com/addStock/",
+        url: "https://itachi7.pythonanywhere.com/auth/addStock/",
     };
     useEffect(() => {
         axios.request(options).then(function (response) {
