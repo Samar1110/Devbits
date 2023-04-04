@@ -64,7 +64,7 @@ export default function Register() {
                         console.log("YO")
 
                         axios.post(
-                            'https://itachi7.pythonanywhere.com//createuser/',
+                            'https://itachi7.pythonanywhere.com/createuser/',
                             dataForApiRequest,
                         )
                             .then(function ({ data, status }) {
@@ -219,7 +219,7 @@ export default function Register() {
         }
 
         axios.post(
-            'https://itachi7.pythonanywhere.com//createuser/',
+            'https://itachi7.pythonanywhere.com/createuser/',
             dataForApiRequest,
         )
             .then(function ({ data, status }) {

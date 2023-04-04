@@ -10,7 +10,7 @@ export default function UserTransaction(props) {
 
     const options3 = {
         method: 'GET',
-        url: "https://itachi7.pythonanywhere.com//addStock/",
+        url: "https://itachi7.pythonanywhere.com/addStock/",
     };
     useEffect(() => {
         axios.request(options3).then(function (response) {
