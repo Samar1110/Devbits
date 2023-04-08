@@ -87,7 +87,7 @@ export default function User() {
     
     const options2 = {
         method: 'GET',
-        url: "http://127.0.0.1:8000/userInfo/",
+        url: "https://itachi7.pythonanywhere.com/auth/userInfo/",
     };
     useEffect(() => {
         axios.request(options2).then(function (response) {
