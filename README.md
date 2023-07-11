@@ -1,6 +1,6 @@
 # Backend Repo here
 
-Click on this link to go backend of Devbits [Devbits Backend]([https://github.com/facebook/create-react-app](https://github.com/archit-2003/Devbits-23-Backend)).
+Click on this link to go backend of Devbits [Devbits Backend](https://github.com/archit-2003/Devbits-23-Backend).
 
 # Getting Started with Create React App
 
