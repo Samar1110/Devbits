@@ -24,8 +24,8 @@ export default function Team() {
                             <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-800 text-gray-100">
                                 <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="https://i.pinimg.com/236x/61/cd/a7/61cda705bb1355f4826ee5ff3d817e12.jpg" />
                                 <div className="flex-1 my-4">
-                                    <p className="text-xl font-semibold leading-snug">Rakshit Sawhney</p>
-                                    <p>Visual Designer</p>
+                                    <p className="text-xl font-semibold leading-snug">Rajat Shukla</p>
+                                    <p>Developer</p>
                                 </div>
                                 <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
                                     <a rel="noopener noreferrer" href="#" title="Email" className="text-gray-50 hover:text-emerald-600">
